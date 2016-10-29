@@ -47,7 +47,7 @@ converge apply --local protobuf-setup.hcl
 
 ```
 
-The setup module installs packages required to build Protocol Buffers, downloads the source and runs `autogen.sh` and `configure`:
+The setup module installs packages required to build Protocol Buffers, downloads the source and runs `autogen.sh`.
 
 ![](graphs/protobuf-setup.png)
 
@@ -75,5 +75,3 @@ These can be overridden using command line arguments to converge:
 converge apply --local -p install_dir=/usr/local
 
 ```
-
-The `protoc-setup.hcl`
