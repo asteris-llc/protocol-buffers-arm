@@ -19,10 +19,6 @@ task "package-deps" {
   apply = "apt-get update 2>&1 > /dev/null && apt-get -y install {{param `packages`}}"
 }
 
-file.directory "proto-install" {
-  destination = "{{param `install_dir`}}"
-}
-
 file.directory "proto-build" {
   destination = "{{param `build_dir`}}"
 }
@@ -32,7 +28,7 @@ task "protobuf-src-dl" {
   apply       = "curl -L -O https://github.com/google/protobuf/archive/v{{param `protobuf_version`}}.tar.gz"
   dir         = "{{param `build_dir`}}"
   interpreter = "/bin/bash"
-  depends     = ["file.directory.proto-build"]
+  depends     = ["task.package-deps","file.directory.proto-build"]
 }
 
 task "protobuf-src-unzip" {
@@ -49,12 +45,4 @@ task "autogen.sh" {
   dir         = "{{param `build_dir`}}/protobuf-{{param `protobuf_version`}}"
   interpreter = "/bin/bash"
   depends     = ["task.protobuf-src-unzip"]
-}
-
-task "configure" {
-  check       = "[[ -f Makefile ]]"
-  apply       = "./configure --prefix {{param `install_dir`}}"
-  dir         = "{{param `build_dir`}}/protobuf-{{param `protobuf_version`}}"
-  interpreter = "/bin/bash"
-  depends     = ["task.autogen.sh", "file.directory.proto-install"]
 }
