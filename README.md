@@ -49,7 +49,7 @@ converge apply --local protobuf-setup.hcl
 
 The setup module installs packages required to build Protocol Buffers, downloads the source and runs `autogen.sh` and `configure`:
 
-![](graphs/protoc-setup.png)
+![](graphs/protobuf-setup.png)
 
 The build takes several hours:
 
@@ -59,7 +59,7 @@ converge apply --local protobuf-build.hcl
 
 ```
 
-![](graphs/protoc-build.png)
+![](graphs/protobuf-build.png)
 
 By default, the build directory is:
 
