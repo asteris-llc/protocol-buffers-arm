@@ -9,7 +9,7 @@ cycle can take several hours, a binary releases are provided.
 We use [converge](https://github.com/asteris-llc/converge) to manage system
 configurations.
 
-This can be used on a Raspberry Pi devices, or on C1 [scaleway](http://scaleway.com))
+This can be used on a Raspberry Pi devices, or on C1 [scaleway](http://scaleway.com)
 ARM-based systems.
 
 ### Downloading and Installing Binaries
@@ -47,10 +47,33 @@ converge apply --local protobuf-setup.hcl
 
 ```
 
+The setup module installs packages required to build Protocol Buffers, downloads the source and runs `autogen.sh` and `configure`:
+
+![](graphs/protoc-setup.png)
+
 The build takes several hours:
 
 ```shell
 
-converge apply --local protobuf-setup.hcl
+converge apply --local protobuf-build.hcl
 
 ```
+
+![](graphs/protoc-build.png)
+
+By default, the build directory is:
+
+    {{env `HOME`}}/protobuf-build/protobuf-{{param `protobuf_version`}}
+and the install directory is
+
+    {{env `HOME`}}/protobuf-install/protobuf-{{param `protobuf_version`}}
+
+These can be overridden using command line arguments to converge:
+
+```shell
+
+converge apply --local -p install_dir=/usr/local
+
+```
+
+The `protoc-setup.hcl`
