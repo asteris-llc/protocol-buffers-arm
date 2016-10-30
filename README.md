@@ -75,3 +75,9 @@ These can be overridden using command line arguments to converge:
 converge apply --local -p install_dir=/usr/local
 
 ```
+
+## License
+
+The configuration files are released under the Apache 2.0 license. See [LICENSE](LICENSE).
+
+Binary and source releases of Protocol Buffers are released under the following [license](LICENSE.protobuf).
